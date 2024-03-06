@@ -1,34 +1,42 @@
 import pygame
 
 class World:
-    def __init__(self, HEIGHT, WIDTH):
+    def __init__(self, WIDTH, HEIGHT):
+
         pygame.init()
-        self.screen = pygame.display.set_mode([HEIGHT, WIDTH])
+        self.screen = pygame.display.set_mode([WIDTH, HEIGHT])
         self.running = True
-        self.x = 125
-        self.y = 300
-        self.box = pygame.Rect(self.x, self.y, 100, 100)
-        self.momentumX = self.momentumY = 1
+
+        self.screenDims = (WIDTH, HEIGHT)
+        self.pos = [125, 125]
+        self.momtm = [1, 0.5]
+
+        # self.box = pygame.Rect(self.x, self.y, 100, 100)
+        self.image = pygame.transform.scale(pygame.image.load("krish.png").convert(), (100, 100))
+        pygame.display.set_icon(self.image)
+        
+    
     
     def scrUpdate(self):
-        self.x += self.momentumX
-        self.y += self.momentumY
-        print(self.x)
-        self.box.update(self.x, self.y, 100, 100)
         self.screen.fill((100, 100, 100))
-        if self.collision():
-            pygame.quit()
-        pygame.draw.rect(self.screen, (100, 0, 75), self.box)
+        self.pos[0] += self.momtm[0]
+        self.pos[1] += self.momtm[1]
+        self.screen.blit(self.image, (self.pos[0], self.pos[1]))
+        self.collision()
+
+        # self.box.update(self.x, self.y, 100, 100)
+        # pygame.draw.rect(self.screen, (100, 0, 75), self.box)
+
         pygame.display.flip()
        
     def collision(self):
-        if self.x == 400 or self.x == 0:
-            self.momentumX *= -1
-        if self.y == 400 or self.y == 0:
-            self.momentumY *= -1
+        if self.pos[0] == self.screenDims[0] - 100 or self.pos[0] == 0:
+            self.momtm[0] *= -1
+        if self.pos[1] == self.screenDims[1] - 100 or self.pos[1] == 0:
+            self.momtm[1] *= -1
 
 
-world = World(500, 500)
+world = World(750, 500)
 while world.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
