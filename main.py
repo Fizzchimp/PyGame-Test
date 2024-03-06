@@ -8,7 +8,7 @@ class World:
         self.running = True
 
         self.screenDims = (WIDTH, HEIGHT)
-        self.pos = [125, 125]
+        self.pos = [WIDTH / 2, HEIGHT / 2]
         self.momtm = [1, 0.5]
 
         # self.box = pygame.Rect(self.x, self.y, 100, 100)
