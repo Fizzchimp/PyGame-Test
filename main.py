@@ -13,7 +13,7 @@ class World:
         self.lines = []
 
         # self.box = pygame.Rect(self.x, self.y, 100, 100)
-        self.image = pygame.transform.scale(pygame.image.load("krish.png").convert(), (100, 100))
+        self.image = pygame.transform.scale(pygame.image.load("jjj.png").convert(), (100, 100))
         pygame.display.set_icon(self.image)
         
     
@@ -23,7 +23,6 @@ class World:
         self.pos[0] += self.momtm[0]
         self.pos[1] += self.momtm[1]
         for line in self.lines:
-            print("A")
             pygame.draw.line(self.screen, (255, 0, 0), line[0], line[1])
         self.screen.blit(self.image, (self.pos[0], self.pos[1]))
         self.collision()
@@ -46,7 +45,7 @@ class World:
         self.point = point
 
 
-world = World(948, 502)
+world = World(500, 398)
 while world.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
