@@ -7,3 +7,6 @@ class Box():
         self.pos = pos
         self.momtm = momtm
         self.colRect = pygame.Rect(pos, dims)
+        
+    def move(self, pos):
+        self.colRect = pygame.Rect(self.pos, self.dims)
