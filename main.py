@@ -11,35 +11,39 @@ class World:
         self.screenDims = (WIDTH, HEIGHT)
         self.point = self.pos = [WIDTH / 2, HEIGHT / 2]
         self.lines = []
-        self.boxes = [Box([200,200], [1000, 0], [-1, 0.25], "03_sopie.png"),
-                      Box([200, 200], [100, 100], [1, 0.25], "01_krish.png"),
-                      Box([200, 200], [300, 300], [1, -0.25], "04_hana.png"), 
-                      Box([200, 200], [500, 500], [1, -0.25], "05_ella.png"),
-                      Box([200, 200], [800, 500], [1, -0.25], "06_rob.png")]
+        self.boxes = [Box([200,200], [500, 100], [1, 1], "03_sopie.png"),
+                      Box([200, 200], [710, 100], [1, 1], "01_krish.png")]
+                    #   Box([100, 100], [500, 100], [1, -0.25], "04_hana.png"), 
+                    #   Box([100, 100], [500, 300], [1, -0.25], "05_ella.png"),
+                    #   Box([100, 100], [300, 300], [1, -0.25], "06_rob.png")]
         pygame.display.set_icon(self.boxes[0].image)
         
     
     
     def scrUpdate(self):
         self.screen.fill((100, 100, 100))
-        #for line in self.lines:
-        #    pygame.draw.line(self.screen, (255, 0, 0), line[0], line[1])
+        
             
-        for box in self.boxes:
+        for i, box in enumerate(self.boxes):
             box.pos[0] += box.momtm[0]
             box.pos[1] += box.momtm[1]
             self.screen.blit(box.image, (box.pos[0], box.pos[1]))
             box.move(box.pos)
-            #pygame.draw.rect(self.screen, (10, 10, 10), box.colRect)
             self.colDetect(box)
         
         pygame.display.flip()
        
     def colDetect(self, object):
         for box2 in self.boxes:
-            if object.colRect.colliderect(box2.colRect) and object.colRect != box2.colRect:
-                object.momtm[0]  *= -1
+            if object.colRect.colliderect(box2.colRect) and box2 != object:
+                print(object.pos, box2.pos)
+
+                # if object.pos[0] == box2.pos[0] + 200 or object.pos[0] == box2.pos[0] - 200:
+                object.momtm[0] *= -1
+                # else:
+                object.momtm[1]  *= -1
                     
+
         if object.pos[0] == self.screenDims[0] - object.dims[0] or object.pos[0] == 0:
             object.momtm[0] *= -1
             
@@ -53,7 +57,7 @@ class World:
         self.point = point
 
 
-world = World(1500, 800)
+world = World(1000, 500)
 
 while world.running:
     for event in pygame.event.get():
@@ -61,6 +65,6 @@ while world.running:
             world.running = False
  
     world.scrUpdate()
-    pygame.time.wait(4)
+    pygame.time.wait(40)
 
 pygame.quit()
