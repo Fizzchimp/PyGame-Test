@@ -13,7 +13,7 @@ class World:
         self.lines = []
 
         # self.box = pygame.Rect(self.x, self.y, 100, 100)
-        self.image = pygame.transform.scale(pygame.image.load("jjj.png").convert(), (100, 100))
+        self.image = pygame.transform.scale(pygame.image.load("krish.png").convert(), (200, 200))
         pygame.display.set_icon(self.image)
         
     
@@ -33,10 +33,10 @@ class World:
         pygame.display.flip()
        
     def collision(self):
-        if self.pos[0] == self.screenDims[0] - 100 or self.pos[0] == 0:
+        if self.pos[0] == self.screenDims[0] - 200 or self.pos[0] == 0:
             self.momtm[0] *= -1
             self.lineDraw(self.pos)
-        if self.pos[1] == self.screenDims[1] - 100 or self.pos[1] == 0:
+        if self.pos[1] == self.screenDims[1] - 200 or self.pos[1] == 0:
             self.momtm[1] *= -1
             self.lineDraw(self.pos)
             
@@ -45,7 +45,7 @@ class World:
         self.point = point
 
 
-world = World(500, 398)
+world = World(1500, 750)
 while world.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
