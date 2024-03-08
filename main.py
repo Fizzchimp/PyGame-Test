@@ -38,10 +38,10 @@ class World:
             if object.colRect.colliderect(box2.colRect) and box2 != object:
                 print(object.pos, box2.pos)
 
-                # if object.pos[0] == box2.pos[0] + 200 or object.pos[0] == box2.pos[0] - 200:
-                object.momtm[0] *= -1
-                # else:
-                object.momtm[1]  *= -1
+                if object.pos[0] >= box2.pos[0] + 200 or object.pos[0] <= box2.pos[0] - 200:
+                    object.momtm[0] *= -1
+                else:
+                    object.momtm[1]  *= -1
                     
 
         if object.pos[0] == self.screenDims[0] - object.dims[0] or object.pos[0] == 0:
