@@ -1,4 +1,5 @@
 import pygame
+from objects import *
 
 class World:
     def __init__(self, WIDTH, HEIGHT):
@@ -9,43 +10,40 @@ class World:
 
         self.screenDims = (WIDTH, HEIGHT)
         self.point = self.pos = [WIDTH / 2, HEIGHT / 2]
-        self.momtm = [1, 0.25]
         self.lines = []
-
-        # self.box = pygame.Rect(self.x, self.y, 100, 100)
-        self.image = pygame.transform.scale(pygame.image.load("krish.png").convert(), (200, 200))
-        pygame.display.set_icon(self.image)
+        self.boxes = [Box([200, 200], [400, 400], [-1, 0.25], "03_sopie.png"), Box([200, 200], [100, 100], [1, 0.25], "01_krish.png")]
+        pygame.display.set_icon(self.boxes[0].image)
         
     
     
     def scrUpdate(self):
         self.screen.fill((100, 100, 100))
-        self.pos[0] += self.momtm[0]
-        self.pos[1] += self.momtm[1]
-        for line in self.lines:
-            pygame.draw.line(self.screen, (255, 0, 0), line[0], line[1])
-        self.screen.blit(self.image, (self.pos[0], self.pos[1]))
-        self.collision()
-
-        # self.box.update(self.x, self.y, 100, 100)
-        # pygame.draw.rect(self.screen, (100, 0, 75), self.box)
-
+        #for line in self.lines:
+        #    pygame.draw.line(self.screen, (255, 0, 0), line[0], line[1])
+            
+        for box in self.boxes:
+            box.pos[0] += box.momtm[0]
+            box.pos[1] += box.momtm[1]
+            self.screen.blit(box.image, (box.pos[0], box.pos[1]))
+            self.collision(box)
+        
         pygame.display.flip()
        
-    def collision(self):
-        if self.pos[0] == self.screenDims[0] - 200 or self.pos[0] == 0:
-            self.momtm[0] *= -1
-            self.lineDraw(self.pos)
-        if self.pos[1] == self.screenDims[1] - 200 or self.pos[1] == 0:
-            self.momtm[1] *= -1
-            self.lineDraw(self.pos)
+    def collision(self, object):
+        if object.pos[0] == self.screenDims[0] - object.dims[0] or object.pos[0] == 0:
+            object.momtm[0] *= -1
+            #for box2 in self.boxes():
+             #   if object.pos == 
+        if object.pos[1] == self.screenDims[1] - object.dims[1] or object.pos[1] == 0:
+            object.momtm[1] *= -1
+            #self.lineDraw(self.pos)
             
     def lineDraw(self, point):
         self.lines.append([self.point, point])
         self.point = point
 
 
-world = World(1500, 750)
+world = World(1500, 800)
 while world.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
