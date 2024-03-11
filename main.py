@@ -11,12 +11,16 @@ class World:
         self.screenDims = (WIDTH, HEIGHT)
         self.point = self.pos = [WIDTH / 2, HEIGHT / 2]
         self.lines = []
-        self.boxes = [Box([100, 100], [700, 50], [1, -0.5], "03_sopie.png"),
-                      Box([100, 100], [700, 254], [-1, 1], "01_krish.png"),
+        self.boxes = [Box([100, 100], [700, 254], [-1, 1], "01_krish.png"),
+                      Box([100, 100], [200, 300], [-0.5, 0.25], "02_angus.png"),
+                      Box([100, 100], [10, 10], [1, -0.5], "03_sopie.png"),
                       Box([100, 100], [500, 100], [-0.25, 0.25], "04_hana.png"), 
                       Box([100, 100], [500, 300], [1, 0.5], "05_ella.png"),
-                      Box([100, 100], [300, 300], [-1, -0.25], "06_rob.png")]
-        pygame.display.set_icon(self.boxes[0].image)
+                      Box([100, 100], [300, 300], [-1, -0.25], "06_rob.png"),
+                      Box([100, 100], [800, 253], [-1, 0.5], "07_callum.png"),
+                      Box([100, 100], [1200, 650], [0.25, 0.5], "08_isla.png"),
+                      Box([100, 100], [1100, 400], [-0.5, 0.25], "09_willow.png"),]
+        pygame.display.set_icon(pygame.image.load("00_image.png"))
         
     
     
@@ -67,7 +71,7 @@ class World:
         self.point = point
 
 
-world = World(1000, 500)
+world = World(1496, 786)
 
 while world.running:
     for event in pygame.event.get():
